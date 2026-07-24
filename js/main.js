@@ -5,9 +5,18 @@ import { initMarquee } from './modules/marquee.js'
 import { initAnimatedText } from './modules/animated-text.js'
 import { initProjectCards } from './modules/project-cards.js'
 import { slugify } from './modules/slugify.js'
+import { initI18n } from './modules/i18n.js'
+import { translations } from '../data/i18n.js'
+
+/** Devuelve el texto en el idioma activo; si el campo es un string simple
+ *  (no bilingüe, como los nombres de proyecto), lo devuelve tal cual. */
+function t(field, lang) {
+  if (field && typeof field === 'object' && !Array.isArray(field)) return field[lang] ?? field.es
+  return field
+}
 
 /* ---------- Render: Services ---------- */
-function renderServices() {
+function renderServices(lang) {
   const list = document.querySelector('#servicesList')
   if (!list) return
 
@@ -17,8 +26,8 @@ function renderServices() {
       <div class="service-item fade-in" data-y="30" data-delay="${(i * 0.1).toFixed(2)}">
         <span class="service-item__number">${s.number}</span>
         <div class="service-item__body">
-          <h3 class="service-item__name">${s.name}</h3>
-          <p class="service-item__desc">${s.description}</p>
+          <h3 class="service-item__name">${t(s.name, lang)}</h3>
+          <p class="service-item__desc">${t(s.description, lang)}</p>
         </div>
       </div>`,
     )
@@ -26,9 +35,11 @@ function renderServices() {
 }
 
 /* ---------- Render: Projects ---------- */
-function renderProjects() {
+function renderProjects(lang) {
   const list = document.querySelector('#projectsList')
   if (!list) return
+
+  const liveProjectLabel = translations[lang].live_project
 
   list.innerHTML = projects
     .map(
@@ -39,11 +50,11 @@ function renderProjects() {
             <div class="project-card__id">
               <span class="project-card__number">${p.number}</span>
               <div class="project-card__meta">
-                <span class="project-card__category">${p.category}</span>
+                <span class="project-card__category">${t(p.category, lang)}</span>
                 <h3 class="project-card__name">${p.name}</h3>
               </div>
             </div>
-            <a href="proyecto.html?slug=${slugify(p.name)}" class="btn btn-outline">Ver Proyecto</a>
+            <a href="proyecto.html?slug=${slugify(p.name)}" class="btn btn-outline">${liveProjectLabel}</a>
           </div>
           <div class="project-card__images">
             <div class="project-card__col">
@@ -60,17 +71,35 @@ function renderProjects() {
     .join('')
 }
 
-/* ---------- Init ---------- */
-document.addEventListener('DOMContentLoaded', () => {
-  renderServices()
-  renderProjects()
-
-  initFadeIn()
-  initMagnet('#heroPortrait', { padding: 150, strength: 3 })
-  initMarquee('#marquee', marqueeImages)
+/* ---------- Refrescar el texto animado del About en el idioma activo ---------- */
+function refreshAboutText(lang) {
+  const el = document.querySelector('#aboutText')
+  if (!el) return
+  el.dataset.text = translations[lang].about_text
   initAnimatedText('#aboutText')
+}
+
+/* ---------- Vuelve a pintar TODO lo que depende del idioma ---------- */
+function renderLocalizedContent(lang) {
+  renderServices(lang)
+  renderProjects(lang)
+  refreshAboutText(lang)
+
   initProjectCards('#projects', '#projectsList')
 
-  // Vuelve a evaluar los nuevos elementos fade-in que se acaban de renderizar
+  // Vuelve a evaluar los elementos .fade-in recién pintados
   initFadeIn()
+}
+
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('year').textContent = new Date().getFullYear()
+
+  // Estas no dependen del idioma, se inicializan una sola vez
+  initMagnet('#heroPortrait', { padding: 150, strength: 3 })
+  initMarquee('#marquee', marqueeImages)
+
+  // initI18n detecta/aplica el idioma y llama a renderLocalizedContent
+  // cada vez que carga la página o alguien toca el botón ES/EN
+  initI18n(renderLocalizedContent)
 })

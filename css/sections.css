@@ -15,14 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 1rem;
-
-  /* respaldo: si en una pantalla muy angosta ni siquiera con letra chica
-     alcanza el espacio para los 4 links, en vez de romperse el nav se
-     desliza horizontalmente (mejor un swipe que un diseño quebrado) */
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox: oculta la barra de scroll */
+  gap: 0.7rem;
 
   /* lo deja "pegado" contra la ventana del navegador, no contra la página */
   position: fixed;
@@ -33,11 +26,11 @@
 
   /* con left:0 + right:0 + max-width + margin auto, el nav se centra solo
      y no se estira de borde a borde en pantallas muy anchas */
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
   width: calc(100% - 3rem);
 
-  padding: 1rem 1.75rem;
+  padding: 0.85rem 1.4rem;
   border-radius: 999px;
 
   background: rgba(255, 255, 255, 0.1);
@@ -50,37 +43,31 @@
     0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
-.hero__nav::-webkit-scrollbar {
-  display: none; /* Chrome/Safari: oculta la barra de scroll */
-}
-
-@media (max-width: 380px) {
+@media (min-width: 420px) {
   .hero__nav {
-    gap: 0.65rem;
-    padding: 0.85rem 1.25rem;
-  }
-
-  .hero__nav a {
-    font-size: 0.72rem;
+    gap: 0.9rem;
+    padding: 1rem 1.75rem;
   }
 }
 
 @media (min-width: 768px) {
   .hero__nav {
     top: 2rem;
-    max-width: 760px;
+    max-width: 840px;
     padding: 1.1rem 2.25rem;
   }
 }
 
 .hero__nav a {
-  font-size: 0.85rem;
+  /* el texto nunca se parte en 2 líneas; en pantallas angostas se achica
+     con clamp() en vez de desbordarse o hacer scroll */
+  font-size: clamp(0.62rem, 2.6vw, 0.9rem);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.03em;
   color: var(--color-text-light);
   transition: opacity 0.2s ease;
-  white-space: nowrap; /* evita que "SOBRE MÍ" se parta en 2 líneas */
+  white-space: nowrap;
 }
 
 .hero__nav a:hover {
@@ -90,12 +77,45 @@
 @media (min-width: 768px) {
   .hero__nav a {
     font-size: 0.95rem;
+    letter-spacing: 0.08em;
   }
 }
 
 @media (min-width: 992px) {
   .hero__nav a {
     font-size: 1rem;
+  }
+}
+
+/* Botón redondo ES/EN — tamaño fijo, no compite por espacio con el texto */
+.lang-toggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-light);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .lang-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.72rem;
   }
 }
 

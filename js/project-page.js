@@ -1,35 +1,44 @@
 import { projects } from '../data/content.js'
+import { translations } from '../data/i18n.js'
 import { initFadeIn } from './modules/fade-in.js'
 import { slugify } from './modules/slugify.js'
+import { initI18n } from './modules/i18n.js'
 
 const container = document.querySelector('#projectDetail')
+
+/** Devuelve el texto en el idioma activo; si el campo es un string simple
+ *  (no bilingüe, como los nombres de proyecto), lo devuelve tal cual. */
+function t(field, lang) {
+  if (field && typeof field === 'object' && !Array.isArray(field)) return field[lang] ?? field.es
+  return field
+}
 
 function findProjectBySlug(slug) {
   return projects.find((p) => slugify(p.name) === slug)
 }
 
-function renderNotFound() {
+function renderNotFound(lang) {
+  const dict = translations[lang]
   container.innerHTML = `
-    <a href="index.html#projects" class="project-detail__back">&larr; Volver a proyectos</a>
-    <h1 class="project-detail__name">Proyecto no encontrado</h1>
-    <p class="project-detail__subtitle">
-      No encontramos ese proyecto. Revisa el enlace o vuelve a la sección de proyectos.
-    </p>`
+    <a href="index.html#projects" class="project-detail__back">${dict.project_back}</a>
+    <h1 class="project-detail__name">${dict.project_not_found_title}</h1>
+    <p class="project-detail__subtitle">${dict.project_not_found_text}</p>`
 }
 
 /** Arma el bloque "2025 - Nebuly Studios" a partir del año y el estudio/cliente. */
-function buildYearStudioTag(project) {
-  const parts = [project.year, project.studio].filter(Boolean)
+function buildYearStudioTag(project, lang) {
+  const parts = [project.year, t(project.studio, lang)].filter(Boolean)
   return parts.length ? parts.join(' - ') : ''
 }
 
-function render() {
+function render(lang) {
+  const dict = translations[lang]
   const params = new URLSearchParams(window.location.search)
   const slug = params.get('slug')
   const project = findProjectBySlug(slug)
 
   if (!project) {
-    renderNotFound()
+    renderNotFound(lang)
     return
   }
 
@@ -40,27 +49,34 @@ function render() {
   document.title = `${project.name} — Steven Franco`
 
   const heroImg = project.heroImage || project.images?.[project.images.length - 1] || ''
-  const yearStudioTag = buildYearStudioTag(project)
-  const hasInfoCards = Boolean(project.descriptionText || project.roleText)
+  const yearStudioTag = buildYearStudioTag(project, lang)
+  const descriptionText = t(project.descriptionText, lang)
+  const roleText = t(project.roleText, lang)
+  const hasInfoCards = Boolean(descriptionText || roleText)
   const hasTech = Boolean(project.technologies && project.technologies.length)
-  const hasLists = Boolean(
-    (project.contributions && project.contributions.length) ||
-      (project.results && project.results.length),
-  )
+  const contributions = project.contributions ? t(project.contributions, lang) : []
+  const results = project.results ? t(project.results, lang) : []
+  const hasLists = Boolean((contributions && contributions.length) || (results && results.length))
   const hasVideo = Boolean(project.videoId)
 
   container.innerHTML = `
-    <a href="index.html#projects" class="project-detail__back">&larr; Volver a proyectos</a>
+    <a href="index.html#projects" class="project-detail__back">${dict.project_back}</a>
 
     <div class="project-detail__hero">
       <div class="project-detail__intro fade-in" data-y="20">
-        <span class="project-detail__badge">${project.category || ''}</span>
+        <span class="project-detail__badge">${t(project.category, lang) || ''}</span>
         <h1 class="project-detail__name">${project.name}</h1>
-        ${project.subtitle ? `<p class="project-detail__subtitle">${project.subtitle}</p>` : ''}
+        ${t(project.subtitle, lang) ? `<p class="project-detail__subtitle">${t(project.subtitle, lang)}</p>` : ''}
         <div class="project-detail__tags">
           ${yearStudioTag ? `<span class="tag-pill">${yearStudioTag}</span>` : ''}
-          ${project.role ? `<span class="tag-pill">${project.role}</span>` : ''}
+          ${t(project.role, lang) ? `<span class="tag-pill">${t(project.role, lang)}</span>` : ''}
         </div>
+
+        ${
+          project.link && project.link !== '#'
+            ? `<a href="${project.link}" target="_blank" rel="noopener" class="btn btn-outline project-detail__live-link">${dict.project_visit_site}</a>`
+            : ''
+        }
       </div>
 
       ${
@@ -76,20 +92,20 @@ function render() {
       hasInfoCards
         ? `<div class="project-detail__info-grid">
             ${
-              project.descriptionText
+              descriptionText
                 ? `<div class="info-card fade-in" data-y="20">
-                    <span class="info-card__label">Descripción General</span>
-                    ${project.descriptionTitle ? `<h3 class="info-card__title">${project.descriptionTitle}</h3>` : ''}
-                    <p class="info-card__text">${project.descriptionText}</p>
+                    <span class="info-card__label">${dict.project_description_label}</span>
+                    ${t(project.descriptionTitle, lang) ? `<h3 class="info-card__title">${t(project.descriptionTitle, lang)}</h3>` : ''}
+                    <p class="info-card__text">${descriptionText}</p>
                   </div>`
                 : ''
             }
             ${
-              project.roleText
+              roleText
                 ? `<div class="info-card fade-in" data-y="20" data-delay="0.1">
-                    <span class="info-card__label">Mi Rol</span>
-                    ${project.roleTitle ? `<h3 class="info-card__title">${project.roleTitle}</h3>` : ''}
-                    <p class="info-card__text">${project.roleText}</p>
+                    <span class="info-card__label">${dict.project_role_label}</span>
+                    ${t(project.roleTitle, lang) ? `<h3 class="info-card__title">${t(project.roleTitle, lang)}</h3>` : ''}
+                    <p class="info-card__text">${roleText}</p>
                   </div>`
                 : ''
             }
@@ -100,9 +116,9 @@ function render() {
     ${
       hasTech
         ? `<section class="project-detail__section">
-            <h2 class="project-detail__section-title fade-in" data-y="20">Tecnologías Utilizadas</h2>
+            <h2 class="project-detail__section-title fade-in" data-y="20">${dict.project_tech_title}</h2>
             <div class="tag-pill-list fade-in" data-y="20" data-delay="0.1">
-              ${project.technologies.map((t) => `<span class="tag-pill tag-pill--accent">${t}</span>`).join('')}
+              ${project.technologies.map((tech) => `<span class="tag-pill tag-pill--accent">${tech}</span>`).join('')}
             </div>
           </section>`
         : ''
@@ -112,21 +128,21 @@ function render() {
       hasLists
         ? `<div class="project-detail__lists-grid">
             ${
-              project.contributions && project.contributions.length
+              contributions && contributions.length
                 ? `<div class="list-card fade-in" data-y="20">
-                    <h3 class="list-card__title">Contribuciones Principales</h3>
+                    <h3 class="list-card__title">${dict.project_contributions_title}</h3>
                     <ul class="list-card__list">
-                      ${project.contributions.map((c) => `<li>${c}</li>`).join('')}
+                      ${contributions.map((c) => `<li>${c}</li>`).join('')}
                     </ul>
                   </div>`
                 : ''
             }
             ${
-              project.results && project.results.length
+              results && results.length
                 ? `<div class="list-card fade-in" data-y="20" data-delay="0.1">
-                    <h3 class="list-card__title">Resultados y Aprendizajes</h3>
+                    <h3 class="list-card__title">${dict.project_results_title}</h3>
                     <ul class="list-card__list">
-                      ${project.results.map((r) => `<li>${r}</li>`).join('')}
+                      ${results.map((r) => `<li>${r}</li>`).join('')}
                     </ul>
                   </div>`
                 : ''
@@ -138,7 +154,7 @@ function render() {
     ${
       hasVideo
         ? `<section class="project-detail__section">
-            <h2 class="project-detail__section-title fade-in" data-y="20">Video</h2>
+            <h2 class="project-detail__section-title fade-in" data-y="20">${dict.project_video_title}</h2>
             <div class="project-detail__video-wrap fade-in" data-y="20" data-delay="0.1">
               <iframe
                 class="project-detail__video"
@@ -155,11 +171,11 @@ function render() {
 
     <div class="project-detail__nav">
       <a href="proyecto.html?slug=${slugify(prevProject.name)}" class="project-nav-link project-nav-link--prev">
-        <span class="project-nav-link__label">&larr; Anterior</span>
+        <span class="project-nav-link__label">${dict.project_prev}</span>
         <span class="project-nav-link__name">${prevProject.name}</span>
       </a>
       <a href="proyecto.html?slug=${slugify(nextProject.name)}" class="project-nav-link project-nav-link--next">
-        <span class="project-nav-link__label">Siguiente &rarr;</span>
+        <span class="project-nav-link__label">${dict.project_next}</span>
         <span class="project-nav-link__name">${nextProject.name}</span>
       </a>
     </div>`
@@ -169,5 +185,5 @@ function render() {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('year').textContent = new Date().getFullYear()
-  render()
+  initI18n(render)
 })

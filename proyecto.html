@@ -33,28 +33,39 @@
   <body>
     <!-- Mismo nav "liquid glass" fijo que en index.html -->
     <nav class="hero__nav fade-in" data-y="-20" data-duration="0.7">
-      <a href="index.html#about">Sobre mí</a>
-      <a href="index.html#price">Servicios</a>
-      <a href="index.html#projects">Proyectos</a>
-      <a href="index.html#contact">Contacto</a>
+      <a href="index.html#about" data-i18n="nav_about">Sobre mí</a>
+      <a href="index.html#price" data-i18n="nav_price">Servicios</a>
+      <a href="index.html#projects" data-i18n="nav_projects">Proyectos</a>
+      <a href="index.html#contact" data-i18n="nav_contact">Contacto</a>
+      <a href="assets/cv/CV-Steven-Franco.pdf" target="_blank" rel="noopener" data-i18n="nav_cv">CV</a>
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Cambiar idioma / Switch language">EN</button>
     </nav>
 
     <main>
       <!-- ==================== PROJECT DETAIL ==================== -->
       <section class="project-detail" id="projectDetail">
-        <!-- Se genera dinámicamente desde data/content.js según el ?slug= de la URL -->
+        <!-- Se genera dinámicamente desde data/content.js según el ?slug= de la URL y el idioma activo -->
       </section>
 
       <!-- ==================== FOOTER / CONTACT ==================== -->
       <footer class="footer" id="contact">
-        <h2 class="hero-heading footer__title">¡Trabajemos juntos!</h2>
-        <a href="mailto:scfb120406@gmail.com" class="btn btn-contact">Correo</a>
+        <h2 class="hero-heading footer__title" data-i18n="footer_title">¡Trabajemos juntos!</h2>
+
+        <!-- Mismo número que en index.html: reemplázalo por el tuyo -->
+        <a
+          href="https://wa.me/573000000000?text=Hola%20Steven%2C%20vi%20tu%20portafolio%20y%20quiero%20contactarte"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-contact"
+          >WhatsApp</a
+        >
+
         <div class="footer__links">
-          <a href="https://github.com/Norduss" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/stevenfrancob" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/Norduss" target="_blank" rel="noopener" data-i18n="footer_github">GitHub</a>
+          <a href="https://www.linkedin.com/in/stevenfrancob" target="_blank" rel="noopener" data-i18n="footer_linkedin">LinkedIn</a>
         </div>
         <p class="footer__copy">
-          © <span id="year"></span> Steven Franco. Todos los derechos reservados.
+          © <span id="year"></span> Steven Franco. <span data-i18n="footer_copy_suffix">Todos los derechos reservados.</span>
         </p>
       </footer>
     </main>
