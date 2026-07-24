@@ -1,0 +1,25 @@
+/* ==========================================================================
+   layout.css — estructura general (nav, contenedores, secciones)
+   ========================================================================== */
+
+main {
+  background: var(--color-bg);
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(3rem, 12vw, 160px);
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 576px) {
+  .section-title {
+    margin-bottom: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    margin-bottom: 7rem;
+  }
+}

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steven Franco - Ing Multimedia</title>
+    <meta
+      name="description"
+      content="Ingeniero multimedia y creador 3D low poly, diseño web y experiencias inmersivas."
+    />
+    <meta name="theme-color" content="#0C0C0C" />
+
+    <!-- Tipografía Kanit (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap (grid y utilidades) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+  </head>
+  <body>
+    <main>
+      <!-- ==================== HERO ==================== -->
+      <section class="hero" id="hero">
+        <nav class="hero__nav fade-in" data-y="-20" data-duration="0.7">
+          <a href="#about">Sobre mí</a>
+          <a href="#price">Servicios</a>
+          <a href="#projects">Proyectos</a>
+          <a href="#contact">Contacto</a>
+        </nav>
+
+        <div class="hero__content">
+          <div class="hero__heading-wrap">
+            <h1
+              class="hero-heading hero__heading fade-in"
+              data-delay="0.15"
+              data-y="40"
+              data-duration="0.8"
+            >
+              ¡Hola!
+            </h1>
+          </div>
+
+          <!-- Retrato con efecto imán -->
+          <div
+            class="hero__portrait fade-in"
+            id="heroPortrait"
+            data-delay="0.6"
+            data-y="30"
+            data-duration="0.8"
+          >
+            <div class="hero__portrait-magnet">
+              <img
+                
+              />
+            </div>
+          </div>
+
+          <div class="hero__bottom">
+            <p
+              class="hero__tagline fade-in"
+              data-delay="0.35"
+              data-y="20"
+              data-duration="0.7"
+            >
+              creador de experiencias inmersivas e impactantes
+            </p>
+            <div
+              class="fade-in"
+              data-delay="0.5"
+              data-y="20"
+              data-duration="0.7"
+            >
+              <a href="#contact" class="btn btn-contact">Escríbeme</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== MARQUEE ==================== -->
+      <section class="marquee" id="marquee">
+        <div class="marquee__track">
+          <div class="marquee__row" data-marquee-row="1"></div>
+          <div class="marquee__row" data-marquee-row="2"></div>
+        </div>
+      </section>
+
+      <!-- ==================== ABOUT ==================== -->
+      <section class="about" id="about">
+        
+
+        <div class="about__content">
+          <div class="about__intro">
+            <h2
+              class="hero-heading section-title fade-in"
+              data-y="40"
+              style="margin-bottom: 0"
+            >
+              Sobre mí
+            </h2>
+
+            <p
+              class="about__text animated-text"
+              id="aboutText"
+              data-text="Me apasiona crear soluciones digitales que marquen la diferencia. Trabajo cada proyecto con una mentalidad estratégica, cuidando cada detalle y manteniendo una comunicación cercana durante todo el proceso. Mi objetivo no es solo entregar un buen resultado, sino construir productos funcionales, intuitivos y con un impacto real para quienes los utilizan."
+            ></p>
+          </div>
+
+          <div class="fade-in" data-delay="0.1" data-y="20">
+            <a href="#contact" class="btn btn-contact">Escríbeme</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SERVICES ==================== -->
+      <section class="services" id="price">
+        <h2 class="section-title fade-in" data-y="40">Servicios</h2>
+        <div class="services__list" id="servicesList">
+          <!-- Se genera dinámicamente desde data/content.js -->
+        </div>
+      </section>
+
+      <!-- ==================== PROJECTS ==================== -->
+      <section class="projects" id="projects">
+        <h2 class="hero-heading section-title">Proyectos</h2>
+        <div class="projects__list" id="projectsList">
+          <!-- Se genera dinámicamente desde data/content.js -->
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER / CONTACT ==================== -->
+      <footer class="footer" id="contact">
+        <h2 class="hero-heading footer__title">¡Trabajemos juntos!</h2>
+        <a href="mailto:scfb120406@gmail.com" class="btn btn-contact"
+          >Correo</a
+        >
+        <div class="footer__links">
+
+          <a href="https://github.com/Norduss" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/stevenfrancob" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="footer__copy">
+          © <span id="year"></span> Steven Franco. Todos los derechos reservados.
+        </p>
+      </footer>
+    </main>
+
+    <!-- Bootstrap JS (por si luego agregas navbar colapsable, modales, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Módulos propios (ES Modules nativos del navegador, sin bundler) -->
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

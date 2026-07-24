@@ -1,0 +1,87 @@
+/* ==========================================================================
+   base.css — reset, variables globales y tipografía
+   ========================================================================== */
+
+:root {
+  --color-bg: #0c0c0c;
+  --color-bg-light: #ffffff;
+  --color-text-light: #d7e2ea;
+  --color-text-dark: #0c0c0c;
+  --color-accent: #3cb371;
+
+  --gradient-heading: linear-gradient(180deg, #a7a9ac -3%, #3cb371 100%);
+  --gradient-button: linear-gradient(
+    123deg,
+    #0d3b2a 7%,
+    #137a4d 37%,
+    #3cb371 72%,
+    #9fe7c4 100%
+  );
+
+  --font-heading: "Kanit", sans-serif;
+  --font-body: "Kanit", sans-serif;
+
+  --ease-fade: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  /* OJO: nunca pongas overflow-x aquí (ni en <main>). Cualquier valor de
+     overflow distinto de "visible" en un ancestro rompe el position:sticky
+     de las tarjetas de la sección Projects. El overflow-x: clip se aplica
+     puntualmente solo en .hero y .marquee, que son quienes lo necesitan. */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* Texto con relleno en degradado, usado en los títulos grandes */
+.hero-heading {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Respeta la preferencia de "reducir movimiento" del sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
