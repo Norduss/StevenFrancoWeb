@@ -327,6 +327,7 @@ export const projects = [
     number: '05',
     category: { es: 'Proyecto Universitario', en: 'University Project' },
     name: 'Spot Publicitario - Pony Malta',
+    title: { es: 'Spot Publicitario - Pony Malta', en: 'Pony Malta Advertising Spot' },
     link: '#',
 
     subtitle: {

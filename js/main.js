@@ -15,6 +15,10 @@ function t(field, lang) {
   return field
 }
 
+function projectTitle(project, lang) {
+  return t(project.title ?? project.name, lang)
+}
+
 /* ---------- Render: Services ---------- */
 function renderServices(lang) {
   const list = document.querySelector('#servicesList')
@@ -51,18 +55,18 @@ function renderProjects(lang) {
               <span class="project-card__number">${p.number}</span>
               <div class="project-card__meta">
                 <span class="project-card__category">${t(p.category, lang)}</span>
-                <h3 class="project-card__name">${p.name}</h3>
+                <h3 class="project-card__name">${projectTitle(p, lang)}</h3>
               </div>
             </div>
             <a href="proyecto.html?slug=${slugify(p.name)}" class="btn btn-outline">${liveProjectLabel}</a>
           </div>
           <div class="project-card__images">
             <div class="project-card__col">
-              <img src="${p.images[0]}" alt="${p.name} preview 1" loading="lazy">
-              <img src="${p.images[1]}" alt="${p.name} preview 2" loading="lazy">
+              <img src="${p.images[0]}" alt="${projectTitle(p, lang)} preview 1" loading="lazy">
+              <img src="${p.images[1]}" alt="${projectTitle(p, lang)} preview 2" loading="lazy">
             </div>
             <div class="project-card__wide">
-              <img src="${p.images[2]}" alt="${p.name} preview 3" loading="lazy">
+              <img src="${p.images[2]}" alt="${projectTitle(p, lang)} preview 3" loading="lazy">
             </div>
           </div>
         </article>

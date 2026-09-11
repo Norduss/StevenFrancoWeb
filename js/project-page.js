@@ -13,6 +13,10 @@ function t(field, lang) {
   return field
 }
 
+function projectTitle(project, lang) {
+  return t(project.title ?? project.name, lang)
+}
+
 function findProjectBySlug(slug) {
   return projects.find((p) => slugify(p.name) === slug)
 }
@@ -46,7 +50,8 @@ function render(lang) {
   const prevProject = projects[(index - 1 + projects.length) % projects.length]
   const nextProject = projects[(index + 1) % projects.length]
 
-  document.title = `${project.name} — Steven Franco`
+  const displayName = projectTitle(project, lang)
+  document.title = `${displayName} — Steven Franco`
 
   const heroImg = project.heroImage || project.images?.[project.images.length - 1] || ''
   const yearStudioTag = buildYearStudioTag(project, lang)
@@ -65,7 +70,7 @@ function render(lang) {
     <div class="project-detail__hero">
       <div class="project-detail__intro fade-in" data-y="20">
         <span class="project-detail__badge">${t(project.category, lang) || ''}</span>
-        <h1 class="project-detail__name">${project.name}</h1>
+        <h1 class="project-detail__name">${displayName}</h1>
         ${t(project.subtitle, lang) ? `<p class="project-detail__subtitle">${t(project.subtitle, lang)}</p>` : ''}
         <div class="project-detail__tags">
           ${yearStudioTag ? `<span class="tag-pill">${yearStudioTag}</span>` : ''}
@@ -82,7 +87,7 @@ function render(lang) {
       ${
         heroImg
           ? `<div class="project-detail__hero-image fade-in" data-delay="0.15" data-x="40">
-               <img src="${heroImg}" alt="${project.name}">
+               <img src="${heroImg}" alt="${displayName}">
              </div>`
           : ''
       }
@@ -172,11 +177,11 @@ function render(lang) {
     <div class="project-detail__nav">
       <a href="proyecto.html?slug=${slugify(prevProject.name)}" class="project-nav-link project-nav-link--prev">
         <span class="project-nav-link__label">${dict.project_prev}</span>
-        <span class="project-nav-link__name">${prevProject.name}</span>
+        <span class="project-nav-link__name">${projectTitle(prevProject, lang)}</span>
       </a>
       <a href="proyecto.html?slug=${slugify(nextProject.name)}" class="project-nav-link project-nav-link--next">
         <span class="project-nav-link__label">${dict.project_next}</span>
-        <span class="project-nav-link__name">${nextProject.name}</span>
+        <span class="project-nav-link__name">${projectTitle(nextProject, lang)}</span>
       </a>
     </div>`
 
