@@ -79,7 +79,7 @@ function render(lang) {
 
         ${
           project.link && project.link !== '#'
-            ? `<a href="${project.link}" target="_blank" rel="noopener" class="btn btn-outline project-detail__live-link">${dict.project_visit_site}</a>`
+            ? `<a href="${project.link}" target="_blank" rel="noopener" class="btn btn-outline project-detail__live-link">${t(project.linkLabel, lang) || dict.project_visit_site}</a>`
             : ''
         }
       </div>

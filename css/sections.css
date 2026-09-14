@@ -404,6 +404,52 @@
   font-size: clamp(1rem, 2vw, 1.35rem);
 }
 
+/* ---------- SHOWREEL ---------- */
+.showreel {
+  padding: 2rem 1.25rem 5rem;
+  scroll-margin-top: 7rem;
+  text-align: center;
+}
+
+.showreel .section-title {
+  margin-bottom: 1.5rem;
+}
+
+.showreel__intro {
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.6;
+  opacity: 0.75;
+}
+
+.showreel__player {
+  max-width: 72rem;
+  margin: 0 auto;
+  background: #000;
+}
+
+.showreel__player video {
+  object-fit: contain;
+}
+
+.showreel__link {
+  margin: 1.5rem 0 0;
+}
+
+@media (min-width: 576px) {
+  .showreel {
+    padding: 2rem 2rem 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .showreel {
+    padding: 2rem 2.5rem 8rem;
+  }
+}
+
 /* ---------- SERVICES ---------- */
 .services {
   border-top-left-radius: 40px;

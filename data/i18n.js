@@ -23,6 +23,9 @@ export const translations = {
       'Me apasiona crear soluciones digitales que marquen la diferencia. Trabajo cada proyecto con una mentalidad estratégica, cuidando cada detalle y manteniendo una comunicación cercana durante todo el proceso. Mi objetivo no es solo entregar un buen resultado, sino construir productos funcionales, intuitivos y con un impacto real para quienes los utilizan.',
 
     // Services / Projects
+    showreel_intro: 'Una selección de mis habilidades, proyectos y del trabajo que hago hoy.',
+    showreel_fallback: 'Tu navegador no admite este video.',
+    showreel_open: 'Abrir video ↗',
     services_title: 'Servicios',
     projects_title: 'Proyectos',
     live_project: 'Ver Proyecto',
@@ -64,6 +67,9 @@ export const translations = {
     about_text:
       "I'm passionate about creating digital solutions that make a difference. I approach every project with a strategic mindset, paying attention to every detail and keeping close communication throughout the process. My goal isn't just to deliver a good result, but to build functional, intuitive products with a real impact for the people who use them.",
 
+    showreel_intro: 'A selection of my skills, projects, and the work I do today.',
+    showreel_fallback: 'Your browser does not support this video.',
+    showreel_open: 'Open video ↗',
     services_title: 'Services',
     projects_title: 'Projects',
     live_project: 'View Project',

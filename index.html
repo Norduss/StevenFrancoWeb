@@ -132,6 +132,18 @@
         </div>
       </section>
 
+      <!-- Se muestra automáticamente cuando el archivo de video está disponible. -->
+      <section class="showreel" id="showreel" aria-labelledby="showreelTitle" hidden>
+        <h2 class="hero-heading section-title" id="showreelTitle">ShowReel</h2>
+        <p class="showreel__intro" data-i18n="showreel_intro">Una selección de mis habilidades, proyectos y del trabajo que hago hoy.</p>
+        <div class="showreel__player project-detail__video-wrap">
+          <video id="showreelVideo" class="project-detail__video" controls playsinline preload="metadata" aria-labelledby="showreelTitle">
+            <span data-i18n="showreel_fallback">Tu navegador no admite este video.</span>
+          </video>
+        </div>
+        <a class="showreel__link project-detail__back" href="assets/video/showreel.mp4" target="_blank" rel="noopener" data-i18n="showreel_open">Abrir video ↗</a>
+      </section>
+
       <!-- ==================== SERVICES ==================== -->
       <section class="services" id="price">
         <h2 class="section-title fade-in" data-y="40" data-i18n="services_title">Servicios</h2>

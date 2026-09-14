@@ -6,6 +6,7 @@ import { initAnimatedText } from './modules/animated-text.js'
 import { initProjectCards } from './modules/project-cards.js'
 import { slugify } from './modules/slugify.js'
 import { initI18n } from './modules/i18n.js'
+import { initShowreel } from './modules/showreel.js'
 import { translations } from '../data/i18n.js'
 
 /** Devuelve el texto en el idioma activo; si el campo es un string simple
@@ -102,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Estas no dependen del idioma, se inicializan una sola vez
   initMagnet('#heroPortrait', { padding: 150, strength: 3 })
   initMarquee('#marquee', marqueeImages)
+  initShowreel()
 
   // initI18n detecta/aplica el idioma y llama a renderLocalizedContent
   // cada vez que carga la página o alguien toca el botón ES/EN

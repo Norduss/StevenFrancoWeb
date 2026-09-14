@@ -53,6 +53,45 @@ export const services = [
 export const projects = [
   {
     number: '01',
+    category: { es: 'Videojuego · Game Jam', en: 'Video Game · Game Jam' },
+    name: 'PROTOKOL',
+    link: 'https://jcheesee.itch.io/protokol',
+    linkLabel: { es: 'Jugar en itch.io ↗', en: 'Play on itch.io ↗' },
+    subtitle: {
+      es: 'Verifica mensajes, detecta sabotajes y decide el destino de un búnker soviético.',
+      en: 'Verify messages, detect sabotage, and decide the fate of a Soviet bunker.',
+    },
+    year: '2026',
+    studio: 'Brackeys Game Jam 2026.2',
+    role: { es: 'Diseño de juego · Modelado 3D · Estilo visual', en: 'Game Design · 3D Modeling · Visual Style' },
+    heroImage: 'assets/img/projects/ProtokolCover.png',
+    descriptionTitle: { es: 'Cada mensaje puede ser una amenaza', en: 'Every message could be a threat' },
+    descriptionText: {
+      es: 'PROTOKOL es un videojuego de verificación y toma de decisiones desarrollado en equipo durante Brackeys Game Jam 2026.2. Como oficial de comunicaciones en un búnker soviético, debes analizar códigos, solicitudes y alertas antes de aprobarlos o rechazarlos. Un sabotaje amenaza los sistemas: explora el entorno e interactúa con sus estaciones para descubrir qué información es confiable. Está disponible para jugar en el navegador en itch.io.',
+      en: 'PROTOKOL is a verification and decision-making game developed as a team during Brackeys Game Jam 2026.2. As a communications officer in a Soviet bunker, you must analyze codes, requests, and alerts before approving or rejecting them. Sabotage threatens the systems: explore the environment and interact with its workstations to discover which information you can trust. It is available to play in your browser on itch.io.',
+    },
+    roleTitle: { es: 'Diseño de juego e identidad visual', en: 'Game design and visual identity' },
+    roleText: {
+      es: 'Me encargué del diseño de juego y colaboré en la creación de modelos 3D adicionales y en el estilo visual del proyecto. Mi participación contribuyó a la experiencia de verificación y toma de decisiones, y a la atmósfera oscura e industrial del búnker.',
+      en: 'I was responsible for game design and collaborated on additional 3D models and the project’s visual style. My contribution helped shape the verification and decision-making experience and the bunker’s dark, industrial atmosphere.',
+    },
+    technologies: ['Unity', 'Blender'],
+    contributions: {
+      es: ['Diseño de juego.', 'Creación de modelos 3D adicionales en colaboración con el equipo.', 'Desarrollo del estilo visual del proyecto en equipo.'],
+      en: ['Game design.', 'Creation of additional 3D models in collaboration with the team.', 'Collaborative development of the project’s visual style.'],
+    },
+    results: {
+      es: ['Videojuego publicado en itch.io y jugable en el navegador.', 'Participación en Brackeys Game Jam 2026.2.'],
+      en: ['Game published on itch.io and playable in the browser.', 'Participation in Brackeys Game Jam 2026.2.'],
+    },
+    images: [
+      'assets/img/projects/ProtokolBunker.png',
+      'assets/img/projects/ProtokolGameplay.png',
+      'assets/img/projects/ProtokolCover.png',
+    ],
+  },
+  {
+    number: '02',
     category: { es: 'Proyecto VR', en: 'VR Project' },
     name: 'Caficultor VR',
     link: '#',
@@ -118,7 +157,7 @@ export const projects = [
     ],
   },
   {
-    number: '02',
+    number: '03',
     category: { es: 'Proyecto Universitario', en: 'University Project' },
     name: 'Molassault',
     link: '#',
@@ -192,7 +231,7 @@ export const projects = [
     ],
   },
   {
-    number: '03',
+    number: '04',
     category: { es: 'Proyecto Universitario', en: 'University Project' },
     name: 'Molassault Web',
     link: 'https://molassault-game-website.vercel.app/',
@@ -263,7 +302,7 @@ export const projects = [
     ],
   },
   {
-    number: '04',
+    number: '05',
     category: { es: 'Proyecto Universitario', en: 'University Project' },
     name: 'OccupancyHub',
     link: '#',
@@ -324,7 +363,7 @@ export const projects = [
     ],
   },
   {
-    number: '05',
+    number: '06',
     category: { es: 'Proyecto Universitario', en: 'University Project' },
     name: 'Spot Publicitario - Pony Malta',
     title: { es: 'Spot Publicitario - Pony Malta', en: 'Pony Malta Advertising Spot' },
